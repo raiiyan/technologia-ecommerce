@@ -2,75 +2,76 @@ import { Inngest } from "inngest";
 import ConnectDB from "./db";
 import User from "@/models/User";
 
-// Create a client to send and receive events
 export const inngest = new Inngest({ id: "quickcart-next" });
 
-// Ingest Function to save user data to a database
 export const syncUserCreation = inngest.createFunction(
-    {
-        id:'sync-user-from-clerk'
-    },
-    {
-        event:'clerk.user.created',
-    },
+  { id: "sync-user-from-clerk" },
+  { event: "clerk/user.created" }, // ✅ correct event name
+  async ({ event, step }) => {
+    try {
+      console.log("📥 Received clerk/user.created event");
 
-    async ({ event }) => {
-        const { id, first_name, last_name, email_addresses, image_url} = event.data;
-        const userData = {
-            _id:id,
-            email: email_addresses[0].email_address,
-            name: first_name + " " + last_name,
-            imageUrl: image_url,
-        }
+      const { id, first_name, last_name, email_addresses, image_url } = event.data;
+      const userData = {
+        _id: id,
+        email: email_addresses[0].email_address,
+        name: `${first_name} ${last_name}`,
+        imageUrl: image_url,
+      };
 
-        await ConnectDB()
+      await ConnectDB();
 
-        await User.create(userData)
+      const created = await User.create(userData);
+      console.log("✅ User created:", created);
 
+    } catch (err) {
+      console.error("❌ Error in syncUserCreation:", err);
     }
-)
+  }
+);
 
-
-// Ingest Function to update user data to a database
 export const syncUserUpdate = inngest.createFunction(
-    {
-        id:'update-user-from-clerk'
-    },
-    {
-        event:'clerk.user.updated',
-    },
+  { id: "update-user-from-clerk" },
+  { event: "clerk/user.updated" }, // ✅ correct event name
+  async ({ event }) => {
+    try {
+      console.log("📥 Received clerk/user.updated event");
 
-    async ({ event }) => {
-        const { id, first_name, last_name, email_addresses, image_url} = event.data;
-        const userData = {
-            _id:id,
-            email: email_addresses[0].email_address,
-            name: first_name + " " + last_name,
-            imageUrl: image_url,
-        }
+      const { id, first_name, last_name, email_addresses, image_url } = event.data;
+      const userData = {
+        _id: id,
+        email: email_addresses[0].email_address,
+        name: `${first_name} ${last_name}`,
+        imageUrl: image_url,
+      };
 
-        await ConnectDB()
+      await ConnectDB();
 
-        await User.findByIdAndUpdate(id, userData)
+      const updated = await User.findByIdAndUpdate(id, userData, { new: true });
+      console.log("✅ User updated:", updated);
 
+    } catch (err) {
+      console.error("❌ Error in syncUserUpdate:", err);
     }
-)
+  }
+);
 
-// Ingest Function to delete user data from a database
 export const syncUserDeletion = inngest.createFunction(
-    {
-        id:'delete-user-from-clerk'
-    },
-    {
-        event:'clerk.user.deleted',
-    },
+  { id: "delete-user-from-clerk" },
+  { event: "clerk/user.deleted" }, // ✅ correct event name
+  async ({ event }) => {
+    try {
+      console.log("📥 Received clerk/user.deleted event");
 
-    async ({ event }) => {
-        const { id } = event.data;
+      const { id } = event.data;
 
-        await ConnectDB()
+      await ConnectDB();
 
-        await User.findByIdAndDelete(id)
+      const deleted = await User.findByIdAndDelete(id);
+      console.log("🗑️ User deleted:", deleted);
 
+    } catch (err) {
+      console.error("❌ Error in syncUserDeletion:", err);
     }
-)
+  }
+);
