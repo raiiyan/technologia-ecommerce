@@ -14,7 +14,7 @@ async function ConnectDB() {
   if (!cached.promise) {
     const opts = { bufferCommands: false };
 
-    cached.promise = mongoose.connect(`${process.env.MONGODB_URI}/technologia`, opts);
+    cached.promise = mongoose.connect(`${process.env.MONGODB_URI}`, opts);
 
   }
 
