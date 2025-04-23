@@ -1,4 +1,3 @@
-
 import { useAppContext } from "@/context/AppContext";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -15,14 +14,14 @@ const OrderSummary = () => {
   const fetchUserAddresses = async () => {
     try {
       const token = await getToken()
-      const {data} = await axios.get('/api/user/get-address', {
+      const { data } = await axios.get('/api/user/get-address', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      if(data.success) {
+      if (data.success) {
         setUserAddresses(data.addresses)
-        if(data.addresses.length > 0) {
+        if (data.addresses.length > 0) {
           setSelectedAddress(data.addresses[0])
         }
       } else {
@@ -43,21 +42,21 @@ const OrderSummary = () => {
       if (!selectedAddress) {
         return toast.error("Please select an address")
       }
-      let cartItemsArray = Object.keys(cartItems).map((key) => ({product:key, quantity:cartItems[key]}))
+      let cartItemsArray = Object.keys(cartItems).map((key) => ({ product: key, quantity: cartItems[key] }))
       cartItemsArray = cartItemsArray.filter((item) => item.quantity > 0)
       if (cartItemsArray.length === 0) {
         return toast.error("Please add items to cart")
       }
       const token = await getToken()
-      const {data} = await axios.post('/api/order/create', {
+      const { data } = await axios.post('/api/order/create', {
         address: selectedAddress._id,
         items: cartItemsArray
-      },{
+      }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
-      if(data.success) {
+      if (data.success) {
         toast.success(data.message)
         setCartItems({})
         router.push('/order-placed')
@@ -135,7 +134,7 @@ const OrderSummary = () => {
               placeholder="Enter promo code"
               className="flex-grow w-full outline-none p-2.5 text-gray-600 border"
             />
-            <button className="bg-orange-600 text-white px-9 py-2 hover:bg-orange-700">
+            <button className="bg-[#259922] text-white px-9 py-2 hover:bg-[#1f7c1b]">
               Apply
             </button>
           </div>
@@ -163,7 +162,7 @@ const OrderSummary = () => {
         </div>
       </div>
 
-      <button onClick={createOrder} className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700">
+      <button onClick={createOrder} className="w-full bg-[#259922] text-white py-3 mt-5 hover:bg-[#1f7c1b]">
         Place Order
       </button>
     </div>
