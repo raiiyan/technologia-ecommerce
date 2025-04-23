@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Technologia - E-commerce Website
 
-## Getting Started
+Technologia is a modern, user-friendly e-commerce website designed to provide a seamless shopping experience. From browsing products to secure checkout, our platform offers everything you need for an excellent online shopping experience. The website is built with **Next.js** and styled using **Tailwind CSS**.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Responsive Design:** Fully responsive, optimized for mobile and desktop devices.
+- **Product Listings:** Browse through various product categories.
+- **Secure Checkout:** Integration with secure payment methods for a safe shopping experience.
+- **User Account:** Manage orders, addresses, and view past purchases.
+- **Contact Us Page:** Reach out to us for inquiries, support, or feedback.
+- **Privacy Policy & Terms:** Transparent user policies.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Next.js**: A React framework for building static and dynamic web pages.
+- **Tailwind CSS**: Utility-first CSS framework for rapid design and customization.
+- **Axios**: For making API requests.
+- **React Context API**: For state management.
+- **Node.js**: For the backend API and handling server-side operations.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Setup & Installation
 
-## Learn More
+To run the project locally:
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   git clone https://github.com/yourusername/technologia.git
+   cd technologia
